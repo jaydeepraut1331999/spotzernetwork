@@ -1,7 +1,7 @@
 <div [ngClass]="!isUserLoggedIn ? 'layout' : ''">
-    <app-header *ngIf="!isUserLoggedIn"></app-header>
+    <app-header *ngIf="isUserLoggedIn"></app-header>
     <div class="m-2">
         <router-outlet></router-outlet>
     </div>
-    <app-footer *ngIf="!isUserLoggedIn"></app-footer>
+    <app-footer *ngIf="isUserLoggedIn"></app-footer>
 </div>

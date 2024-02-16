@@ -7,7 +7,7 @@ import { StorageService } from './storage.service';
 export class AuthService {
     public credentials = [{ username: 'johndoh1@gmail.com', password: 'QWEasd!@#123' },
     { username: 'joshua99@gmail.com', password: 'ASDzxc!@#123' },
-    { username: 'jaydeep@gmail.com', password: 'QAZxsw!!!' }];
+    { username: 'jaydeep@gmail.com', password: 'ASDzxc!!!' }];
 
     constructor(private storageService: StorageService) { }
 
