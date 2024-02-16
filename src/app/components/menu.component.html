@@ -1,0 +1,30 @@
+<div class="flex flex-row">
+    <div class="flex-none">
+        <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="navigateToHome()">Home</button>
+            <button mat-menu-item (click)="navigateToHistory()">History</button>
+            <button mat-menu-item (click)="navigateToInvoice()">Invoice</button>
+        </mat-menu>
+        
+    </div>
+    <div class=" basis-1/2">
+        <img src="../../assets/logo1.png" class="h-12" alt="image">
+        </div>
+    <div class=" basis-3/4 flex justify-end" >
+        <div>
+            <button mat-icon-button  matTooltip="coming soon..">
+            <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
+        </button>
+        </div>
+        <div>
+            <button mat-icon-button matTooltip="coming soon..">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+
+        </div>
+    </div>
+
+</div>
