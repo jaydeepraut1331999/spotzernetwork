@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 })
 export class HistoryComponent implements OnInit, OnDestroy {
     private completedTasksClone: any[] = [];
-    private subscription!: Subscription;
+    private subscription: Subscription = new Subscription();
     public completedTasks$: any[] = [];
     public displayedColumns: string[] = ['id', 'taskName', 'category', 'amount', 'discription', 'status', 'completedOn'];
 
@@ -20,10 +20,10 @@ export class HistoryComponent implements OnInit, OnDestroy {
     constructor(private readonly storageService: StorageService
     ) { }
     public ngOnInit(): void {
-        this.storageService.storeData.getCompletedTasks.subscribe((tasks) => {
+        this.subscription.add(this.storageService.storeData.getCompletedTasks.subscribe((tasks) => {
             this.completedTasks$ = tasks;
             this.completedTasksClone = tasks;
-        });
+        }));
     }
     public onFormSubmit(): void {
         if (this.dateRange.controls.fromDate.value && this.dateRange.controls.toDate.value) {

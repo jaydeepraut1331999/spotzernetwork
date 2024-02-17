@@ -11,12 +11,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   public availableTasks$ = new MatTableDataSource();
   public pendingTasks$ = new MatTableDataSource();
   public displayedColumns = ['id', 'taskName', 'category', 'amount', 'discription', 'action'];
-  private subscription!: Subscription;
+  private subscription: Subscription = new Subscription();
   constructor(private readonly storageService: StorageService
   ) { }
   ngOnInit(): void {
-    this.storageService.storeData.getAvailableTasks.subscribe((tasks) => this.availableTasks$.data = tasks);
-    this.storageService.storeData.getPendingTasks.subscribe((tasks) => this.pendingTasks$.data = tasks);
+    this.subscription.add(this.storageService.storeData.getAvailableTasks.subscribe((tasks) => this.availableTasks$.data = tasks));
+    this.subscription.add(this.storageService.storeData.getPendingTasks.subscribe((tasks) => this.pendingTasks$.data = tasks));
 
     this.availableTasks$.filterPredicate = (data: any, filter: string) => (data.category.trim().toLowerCase().indexOf(filter.trim().toLowerCase()) !== -1);
   }

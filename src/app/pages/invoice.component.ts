@@ -12,17 +12,17 @@ export class InvoiceComponent implements OnInit, OnDestroy {
     public displayedColumns = ['id', 'taskName', 'amount', 'hours', 'completedOn'];
     public totalAmtEarned: number = 0;
     public totalHoursSpent: number = 0;
-    private subscription!: Subscription;
+    private subscription: Subscription = new Subscription();
     constructor(private readonly storageService: StorageService
     ) { }
     public ngOnInit(): void {
-        this.subscription = this.storageService.storeData.getInvoices.subscribe((tasks) => {
+        this.subscription.add(this.storageService.storeData.getInvoices.subscribe((tasks) => {
             this.invoices$ = tasks;
             if (tasks.length) {
                 this.totalAmtEarned = tasks.reduce(function (prev, current) { return prev + Number(current.amount); }, 0);
                 this.totalHoursSpent = tasks.reduce(function (prev, current) { return prev + Number(current.hours); }, 0);
             }
-        });
+        }));
     }
 
     public downloadPDF(): void {
