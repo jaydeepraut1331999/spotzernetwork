@@ -9,6 +9,11 @@ import { SnackbarService } from "../services/snackbar-service";
 @Injectable()
 export class uiEffects {
 
+  constructor(private actions$: Actions, private dataService: DataService,
+    private snackbarSerive: SnackbarService,
+    private store$: Store) { }
+
+  // on loadTaskAvailable update the available tasks in the store.
   loadTaskAvailable$ = createEffect(() =>
     this.actions$.pipe(
       ofType(uiActions.loadTaskAvailable),
@@ -22,7 +27,7 @@ export class uiEffects {
       )
     )
   );
-
+  // on loadTaskPending update the pending tasks in the store.
   loadTaskPending$ = createEffect(() =>
     this.actions$.pipe(
       ofType(uiActions.loadTaskPending),
@@ -36,7 +41,7 @@ export class uiEffects {
       )
     )
   );
-
+  // on loadInvoices update the Invoices in the store.
   loadInvoices$ = createEffect(() =>
     this.actions$.pipe(
       ofType(uiActions.loadInvoices),
@@ -52,7 +57,7 @@ export class uiEffects {
 
     )
   );
-
+  // on loadTaskHistory update the completed tasks in the store.
   loadTaskHistory$ = createEffect(() =>
     this.actions$.pipe(
       ofType(uiActions.loadTaskHistory),
@@ -67,7 +72,7 @@ export class uiEffects {
     )
   );
 
-
+  // on assignTask move the task from available to pending and change the status.
   assignTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(uiActions.assignTask),
@@ -79,12 +84,12 @@ export class uiEffects {
         this.snackbarSerive.openSnackBar("Task Assigned Successfully: Moved to In Progress");
         return of(uiActions.updateTaskSucess({
           taskAvailable: taskAvailable.filter((x) => x.id !== action.rowData.id),
-          taskPending: [...taskPending, { ...action.rowData, status: 'pending' }]
+          taskPending: [...taskPending, { ...action.rowData, status: 'Pending' }]
         }));
       })
     )
   );
-
+  // on completeTask move the task from pending to completed and change the status.
   completeTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(uiActions.completeTask),
@@ -98,12 +103,9 @@ export class uiEffects {
         return of(uiActions.updateTaskCompleted({
           taskPending: taskPending.filter((x) => x.id !== action.rowData.id),
           taskCompleted: [...taskCompleted, { ...action.rowData, status: 'Completed', 'completedOn': new Date() }],
-           taskInvoice: [...taskInvoice, { ...action.rowData, status: 'completed', 'completedOn': new Date() }]
+          taskInvoice: [...taskInvoice, { ...action.rowData, status: 'Completed', 'completedOn': new Date() }]
         }));
       })
     )
   );
-  constructor(private actions$: Actions, private dataService: DataService,
-    private snackbarSerive: SnackbarService,
-    private store$: Store) { }
 }

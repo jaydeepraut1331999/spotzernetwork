@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 
-export const getStateData: any = createFeatureSelector<any>('data');
+export const getStateData: any = createFeatureSelector<any>('data'); // get store state.
 
 export const getAvailableTasks = createSelector(getStateData, (stateData: any): any[] => {
     return stateData?.taskAvailable;

@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
-import { DisplayedColumns } from '../model/model';
+import { Subscription } from 'rxjs';
 import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public availableTasks$ = new MatTableDataSource();
   public pendingTasks$ = new MatTableDataSource();
   public displayedColumns = ['id', 'taskName', 'category', 'amount', 'discription', 'action'];
+  private subscription!: Subscription;
   constructor(private readonly storageService: StorageService
   ) { }
   ngOnInit(): void {
@@ -21,11 +21,11 @@ export class HomeComponent implements OnInit {
     this.availableTasks$.filterPredicate = (data: any, filter: string) => (data.category.trim().toLowerCase().indexOf(filter.trim().toLowerCase()) !== -1);
   }
 
-  assignTask(rowData: any) {
+  assignTask(rowData: any): void {
     this.storageService.actionData.assignTask(rowData);
   }
 
-  completeTask(rowData: any) {
+  completeTask(rowData: any): void {
     this.storageService.actionData.completeTask(rowData);
   }
 
@@ -39,5 +39,8 @@ export class HomeComponent implements OnInit {
     this.pendingTasks$.filter = filterValue;
   }
 
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 }

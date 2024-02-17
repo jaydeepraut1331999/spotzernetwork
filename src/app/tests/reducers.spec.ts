@@ -1,16 +1,8 @@
+import { initialState, UIState } from "../models/ui-state";
 import { uiActions } from "../store/actions";
-import { uiReducer, UIState } from "../store/reducers";
+import { uiReducer } from "../store/reducers";
 
-export const initialState: UIState = {
-    taskAvailable: [],
-    taskPending: [],
-    taskCompleted: [],
-    taskInvoice: [],
-    loading: false,
-    error: '',
-    isLoggedIn: false,
-    userInfo: {}
-};
+
 
 describe('Test reducers', () => {
     it('loadAvailableSuccess', () => {

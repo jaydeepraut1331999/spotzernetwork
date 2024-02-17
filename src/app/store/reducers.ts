@@ -1,27 +1,11 @@
 import { Action, createReducer, on, State } from "@ngrx/store";
+import { initialState, UIState } from "../models/ui-state";
 import { uiActions } from "./actions";
 
-export interface UIState {
-    taskAvailable: any[];
-    taskPending: any[];
-    taskCompleted: any[];
-    taskInvoice: any[];
-    loading: boolean;
-    error: string;
-    isLoggedIn: boolean;
-    userInfo: {}
-}
 
-export const initialState: UIState = {
-    taskAvailable: [],
-    taskPending: [],
-    taskCompleted: [],
-    taskInvoice: [],
-    loading: false,
-    error: '',
-    isLoggedIn: false,
-    userInfo: {}
-};
+export function uiReducer(state: any, action: Action) {
+    return _uiReducer(state, action);
+}
 
 const _uiReducer = createReducer(initialState,
     on(uiActions.loadAvailableSuccess, (state, { taskAvailable }) => {
@@ -38,6 +22,4 @@ const _uiReducer = createReducer(initialState,
     on(uiActions.updateUserInfo, (state, { userInfo }) => ({ ...state, userInfo, loading: false }))
 );
 
-export function uiReducer(state: any, action: Action) {
-    return _uiReducer(state, action);
-}
+

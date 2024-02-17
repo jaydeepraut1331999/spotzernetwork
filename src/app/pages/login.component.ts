@@ -37,9 +37,9 @@ export class LoginComponent implements OnInit {
             return;
         }
         this.loading = true;
-        const isLogginSuccessFull = this.authService.verifyLogin(this.formcontrols.username.value,
+        const isLogginSuccessfull = this.authService.verifyLogin(this.formcontrols.username.value,
             this.formcontrols.password.value);
-        if (isLogginSuccessFull) {
+        if (isLogginSuccessfull) {
             this.snackbarService.openSnackBar("User Successfully Logged In")
             this.router.navigate(['/page/home']);
         } else {

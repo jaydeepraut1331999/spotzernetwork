@@ -5,18 +5,27 @@
 @import 'tailwindcss/utilities';
 
 
-html, body { height: 100%; width: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@mixin text-color {
+    color: white;
+}
 
 .snackbar-error-style {
-background-color: tomato;
-color: white;
+    background-color: tomato;
+    @include text-color();
 }
 
 .snackbar-success-style {
     background-color: green;
-    color: white;
+    @include text-color();
 }
-
-
-
