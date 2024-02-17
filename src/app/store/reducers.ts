@@ -25,7 +25,6 @@ export const initialState: UIState = {
 
 const _uiReducer = createReducer(initialState,
     on(uiActions.loadAvailableSuccess, (state, { taskAvailable }) => {
-        console.log(taskAvailable);
         return ({ ...state, taskAvailable, loading: false })
     }),
     on(uiActions.loadPendingSuccess, (state, { taskPending }) => ({ ...state, taskPending, loading: false })),
